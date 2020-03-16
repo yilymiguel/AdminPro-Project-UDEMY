@@ -7,3 +7,7 @@
 .pointer{
   cursor: pointer;
 }
+
+.mblueText :hover {
+  color: #00aced !important;
+}

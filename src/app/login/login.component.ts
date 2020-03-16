@@ -33,7 +33,9 @@ export class LoginComponent implements OnInit {
   }
   
   googleInit() {
+    // @ts-ignore
     gapi.load( 'ath2', () => {
+      // @ts-ignore
       this.auth2 = gapi.auth2.init( {
         client_id: '442737206823-dilej5tevnrv61sovd7bocf5qeafmjs3.apps.googleusercontent.com',
         cookiepolicy: 'single_host_origin',
@@ -49,7 +51,7 @@ export class LoginComponent implements OnInit {
       let token = googleUser.getAuthResponse().id_token;
       
       this._usuarioService.loginGoogle( token )
-        .subscribe( () => window.location.href = '#/dashboard');
+        .subscribe( () => window.location.href = '#/dashboard' );
     } )
   }
   
