@@ -1,29 +1,29 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
 
-//Rutas
-import {APP_ROUTES} from './app.routes';
+// Rutas
+import { APP_ROUTES } from './app.routes';
 
-//Modules
-import {PagesModule} from './pages/pages.module';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+// Modulos
+import { PagesModule } from './pages/pages.module';
 
-//componentes
-import {AppComponent} from './app.component';
-import {LoginComponent} from './login/login.component';
-import {RegisterComponent} from './login/register.component';
+// temporal
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-//services
-import {ServiceModule} from './services/service.module';
+// Servicios
+import { ServiceModule } from './services/service.module';
 
 
+// Componentes
+import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './login/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent,
-    
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -31,10 +31,9 @@ import {ServiceModule} from './services/service.module';
     PagesModule,
     FormsModule,
     ReactiveFormsModule,
-    ServiceModule,
+    ServiceModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-}
+export class AppModule { }

@@ -37,9 +37,9 @@
     <div class="card">
       <div class="card-body" align="center">
         <h4 class="card-title">Imagen del usuario</h4>
-        <h6 class="card-subtitle">nombre del usuario</h6>
+        <h6 class="card-subtitle">{{ usuario.nombre }}</h6>
 
-        <img  *ngIf="!imagenTemp" [src]="usuario.img | imagen" style="width: 250px">
+        <img *ngIf="!imagenTemp" [src]="usuario.img | imagen" style="width: 250px">
         <img *ngIf="imagenTemp" [src]="imagenTemp" (change)="imagenTemp" style="width: 250px">
 
         <div class="form-group">
