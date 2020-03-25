@@ -1,9 +1,10 @@
+/* tslint:disable */
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from "../../models/usuario.model";
-import { UsuarioService } from "../../services/service.index";
+import { Usuario } from '../../models/usuario.model';
+import { UsuarioService } from '../../services/service.index';
 
 import Swal from 'sweetalert2';
-import { ModalUploadService } from "../../components/modal-upload/modal-upload.service";
+import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
 
 @Component( {
   selector: 'app-usuarios',
@@ -39,6 +40,7 @@ export class UsuariosComponent implements OnInit {
       } );
   }
   
+  
   cambiarDesde( valor: number ) {
     
     let desde = this.desde + valor;
@@ -55,6 +57,7 @@ export class UsuariosComponent implements OnInit {
     this.desde += valor;
     this.cargarUsuarios();
   }
+
   
   buscarUsuario( termino: string ) {
     if( termino.length <= 0 ) {
@@ -66,6 +69,7 @@ export class UsuariosComponent implements OnInit {
     
     this._usuarioService.buscarUsuarios( termino )
       .subscribe( ( usuarios: Usuario[] ) => {
+        
         console.log( usuarios );
         this.usuarios = usuarios;
         this.cargando = false;
@@ -93,9 +97,9 @@ export class UsuariosComponent implements OnInit {
           .subscribe( borrado => {
             console.log( borrado );
             this.cargarUsuarios();
-          } )
+          } );
       }
-    } )
+    } );
   }
   
   guardarUsuario( usuario: Usuario ) {

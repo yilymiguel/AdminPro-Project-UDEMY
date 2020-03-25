@@ -3,8 +3,8 @@
     <div class="card">
       <div class="card-body">
 
-        <input #input (keyup)="buscarUsuario( input.value )" type="text" class="form-control"
-               placeholder="Buscar usuarios....">
+        <input #input (keyup)="buscarMedico( input.value )" type="text" class="form-control"
+               placeholder="Buscar medicos....">
 
       </div>
     </div>
@@ -27,48 +27,46 @@
   <div class="col-12">
     <div class="card">
       <div class="card-body">
-        <h3 class="card-title"> Usuarios registrados ( <small> {{ totalRegistros }} </small> )</h3>
+
+        <div class="text-right">
+          <button [routerLink]="['/medico','nuevo']" type="button"
+                  class="btn waves-effect waves-light btn-rounded btn-primary">
+            <i class="fa fa-plus"></i>
+            Crear Medico
+          </button>
+        </div>
+
+        <h3 class="card-title"> Medicos registrados ( <small> {{ _medicoService.totalMedicos }} </small> )</h3>
         <table class="table table-hover">
           <thead>
           <tr>
             <th>Imagen</th>
             <th>Nombre</th>
-            <th>Correo</th>
-            <th>Role</th>
-            <th>Auth</th>
+
+            <th>Hospital</th>
             <th></th>
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let data of usuarios">
+          <tr *ngFor="let data of medicos">
             <td
-              class="w70"><img (click)="mostarModal(data._id)" [src]="data.img | imagen"
+              class="w70"><img (click)="mostarModal(data._id)" [src]="data.img | imagen:'medicos'"
                                class="img-50 img-circle pointer" title="Clic para cambiar imagen"></td>
-            <td>{{ data.nombre }}</td>
-            <td>{{ data.email }}</td>
+            <td>{{data.nombre}}</td>
+
+            <td>{{data.hospital.nombre }}</td>
             <td>
-              <select [(ngModel)]="data.role" name="role" class="form-control">
-                <option value="ADMIN_ROLE">ADMIN_ROLE</option>
-                <option value="USER_ROLE">USER_ROLE</option>
-              </select>
-            </td>
-            <td>
-              <label *ngIf="data.google" class="label label-danger">Google</label>
-              <label *ngIf="!data.google" class="label label-primary">Normal</label>
-            </td>
-            <td>
-              <button (click)="guardarUsuario( data )" class="btn btn-primary">
-                <i class="fa fa-save"></i>
+              <button [routerLink]="['/medico',data._id]" class="btn btn-primary">
+                <i class="fa fa-edit"></i>
               </button>
               |
-              <button (click)="borrarUsuario( data )" class="btn btn-danger">
+              <button (click)="borrarMedico( data )" class="btn btn-danger">
                 <i class="fa fa-trash-o"></i>
               </button>
             </td>
           </tr>
           </tbody>
         </table>
-
         <button (click)="cambiarDesde(-5)" [disabled]="desde <= 0" class="btn btn-secundary">Anteriores</button>
         <button (click)="cambiarDesde(5)" [disabled]="" class="btn btn-secundary">Siguientes
         </button>

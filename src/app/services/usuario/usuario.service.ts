@@ -1,16 +1,13 @@
 /* tslint:disable */
 import { Injectable } from '@angular/core';
 import { Usuario } from '../../models/usuario.model';
-import { HttpClient, HttpHeaders, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { URL_SERVICIOS } from '../../config/config';
 
 //Operator RXJS
 import { map } from "rxjs/operators";
 import { Router } from "@angular/router";
-
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
 //Sweetalert2
 import Swal from 'sweetalert2';
@@ -133,7 +130,6 @@ export class UsuarioService {
         
         // Version mia
         // this.usuario.img = resp.usuarioAct.img;
-        
         Swal.fire( 'Imagen actualizada', this.usuario.nombre +
           ', en el proximo inicio de sesion se aplicara el' +
           ' cambio de imagen.', 'success' );
@@ -145,6 +141,13 @@ export class UsuarioService {
         console.log( resp );
         Swal.fire( 'No se pudo actualizar', 'Error', 'error' );
       } );
+  }
+  
+  cargarUsuario( id: string ) {
+    let url = URL_SERVICIOS + '/usuario/' + id;
+    return this.http.get( url ).pipe(
+      map( ( resp: any ) => resp.usuario )
+    )
   }
   
   cargarUsuarios( desde: number = 0 ) {
@@ -167,8 +170,8 @@ export class UsuarioService {
     url += '?token=' + this.token;
     
     return this.http.delete( url ).pipe(
-      map( resp => {
-        Swal.fire( 'Usuario Borrado', 'El usuario a sido eliminado correctamente', 'success' );
+      map( ( resp: any ) => {
+        Swal.fire( 'Usuario Borrado', 'El usuario: ' + resp.usuario.nombre + ' a sido eliminado correctamente', 'success' );
         return true;
       } )
     );

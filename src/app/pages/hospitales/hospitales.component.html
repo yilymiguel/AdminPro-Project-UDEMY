@@ -1,0 +1,77 @@
+<div class="row animated fadeIn">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+
+        <input #input (keyup)="buscarHospital( input.value )" type="text" class="form-control"
+               placeholder="Buscar hospitales....">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="cargando">
+  <div class="col-12">
+    <div class="alert alert-warning text-center">
+      <strong>Cargando</strong>
+      <br>
+      <i class="fa fa-spinner fa-spin fa-2x"></i>
+      <br>
+      <span>Espere por favor...</span>
+    </div>
+  </div>
+</div>
+
+<div class="row animated fadeIn" *ngIf="!cargando">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+
+        <div class="col-5 pull-right">
+          <div class="input-group form-search ">
+            <input #inputNombre type="text" class="form-control search-query rounded-left"
+                   placeholder="Agregar nombre hospital...">
+            <span class="input-group-btn">
+              <button (click)="crearHospital(inputNombre.value)" data-type="last"
+                      class="btn waves-effect waves-light btn-primary rounded-right">
+                <i class="fa fa-plus"></i>
+              </button>
+            </span>
+          </div>
+        </div>
+        <br>
+        <h3 class="card-title"> Hospitales registrados ( <small> {{ _hospitalService.totalHospitales }} </small> )</h3>
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of hospitales">
+            <td
+              class="w70"><img (click)="mostarModal(data._id)" [src]="data.img | imagen:'hospitales'"
+                               class="img-50 pointer" title="Clic para cambiar imagen"></td>
+            <td>
+              <input class="form-control" type="text" [(ngModel)]="data.nombre" name="nombre"
+                     placeholder="Nombre de hospital"/>
+            </td>
+            <td>
+              <button (click)="guardarHospital( data )" class="btn btn-primary">
+                <i class="fa fa-save"></i>
+              </button>
+              |
+              <button (click)="borrarHospital( data )" class="btn btn-danger">
+                <i class="fa fa-trash-o"></i>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

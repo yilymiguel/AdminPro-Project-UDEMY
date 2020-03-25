@@ -34,3 +34,7 @@
 .oculto {
   display: none;
 }
+
+.hover-white:hover {
+  color: white !important;
+}
